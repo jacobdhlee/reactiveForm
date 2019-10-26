@@ -4,7 +4,7 @@ import * as Styled from './styles';
 import {
   FIELD_TYPE,
   INPUT_TYPE
-} from '../../constants';
+} from '../constants';
 
 class ControlForm extends Component {
   constructor(props) {
@@ -15,11 +15,12 @@ class ControlForm extends Component {
       subInput: [],
       label: '',
     }
+    this.addValue = ['radio', 'checkbox', 'select'];
   }
 
   handleSelect = (type, e) => {
     this.setState({[type]: e.value}, () => {
-      if(type === 'input' && (this.state.input === 'radio' || this.state.input === 'checkbox')) {
+      if((this.state.field === 'input' && this.addValue.includes(this.state.input)) || this.state.field === 'select') {
         if(this.state.subInput.length === 0) {
           const field = {
             name: '',
@@ -65,8 +66,7 @@ class ControlForm extends Component {
           />) 
         : null}
         {
-          (this.state.field === 'input' && 
-          (this.state.input === 'radio' || this.state.input === 'checkbox')) ? (
+          ((this.state.field === 'input' && this.addValue.includes(this.state.input)) || this.state.field === 'select') ? (
             <Styled.SubInputWrapper>
               {this.state.subInput.map((sub, i) => (
                 <Styled.SubInput key={i}>

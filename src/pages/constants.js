@@ -13,4 +13,5 @@ export const FIELD_TYPE = [
   { value: 'textarea', label: 'Textarea' },
   { value: 'datepicker', label: 'Date' },
   { value: 'timepicker', label: 'Time' },
+  { value: 'select', label: 'Select' },
 ]

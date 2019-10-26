@@ -1,16 +1,14 @@
 import React from 'react';
-import * as Styled from './styles';
-
-import ControlForm from './pages/controlForm/ControlForm';
-
+import { Provider } from 'react-redux';
+import store from './stores';
+import Page from './pages/index';
 function App() {
   return (
-    <Styled.Wrapper>
-      <Styled.SubWrapper>
-        <ControlForm />
-      </Styled.SubWrapper>
-      <Styled.SubWrapper>Show the real form here</Styled.SubWrapper>
-    </Styled.Wrapper>
+    <Provider store={store()}>
+      <div>
+        <Page />
+      </div>
+    </Provider>
   );
 }
 
