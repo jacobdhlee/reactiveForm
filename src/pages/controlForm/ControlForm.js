@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { create_form_field } from '../../actions/forms';
 import Select from 'react-select';
 import * as Styled from './styles';
 import {
@@ -34,8 +36,22 @@ class ControlForm extends Component {
     });
   }
 
-  subInputChange = (index, e) =>{
+  handleAddField = () => {
+    let payload = {};
+    for(let item in this.state) {
+      if(this.state[item].length > 0) {
+        payload[item] = this.state[item];
+      }
+    }
+    this.props.addField(payload);
+    console.log(payload)
+  }
 
+  subInputChange = (index, e) =>{
+    let subInput = [...this.state.subInput];
+    let targetItem = subInput[index];
+    targetItem[e.target.name] = e.target.value;
+    this.setState({subInput})
   }
 
   addSubField = () => {
@@ -90,11 +106,18 @@ class ControlForm extends Component {
             </Styled.SubInputWrapper>
           ) : null
         }
-        <button>Render</button>
+        <button onClick={this.handleAddField}>Render</button>
       </div>
     );
   }
   
 };
 
-export default ControlForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addField: (payload) => dispatch(create_form_field(payload)),
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(ControlForm);
