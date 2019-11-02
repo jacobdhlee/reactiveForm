@@ -14,6 +14,7 @@ class ControlForm extends Component {
     this.state = {
       field: '',
       input: '',
+      radioField: '',
       subInput: [],
       label: '',
     }
@@ -83,6 +84,13 @@ class ControlForm extends Component {
         : null}
         {
           ((this.state.field === 'input' && this.addValue.includes(this.state.input)) || this.state.field === 'select') ? (
+            <>
+            {this.state.input === 'radio' ? (
+              <div>
+                <span>Please put name of field</span>
+                <input type={'text'} onChange={(e) => this.setState({radioField: e.target.value})}/>
+              </div>
+            ): null}
             <Styled.SubInputWrapper>
               {this.state.subInput.map((sub, i) => (
                 <Styled.SubInput key={i}>
@@ -104,6 +112,7 @@ class ControlForm extends Component {
               ))}
               <button onClick={this.addSubField}>Add Field</button>
             </Styled.SubInputWrapper>
+            </>
           ) : null
         }
         <button onClick={this.handleAddField}>Render</button>
