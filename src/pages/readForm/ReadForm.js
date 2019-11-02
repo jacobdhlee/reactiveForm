@@ -11,6 +11,7 @@ class ReadForm extends Component {
         <div>Read Update form here</div>
         {(!forms || forms.length === 0) ? null : forms.map((form, i) => {
           const FieldItem = RENDER_ITEMS[form.field];
+          console.log('form.field ', form.field);
           return (
             <div key={i}>
               <FieldItem {...form}/>
