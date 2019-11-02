@@ -4,12 +4,13 @@ import Radio from './input/Radio';
 
 const Input = (props) => {
   console.log('props in Input >>>>> ', props)
+  
   return (
     <div>
       <label>{props.label}</label>
-      {props.input && props.input === 'checkbox' ? <Checkbox {...props}/> : props.input && props.input === 'radio' ? <Radio {...props}/> : props.input ? (
-        <input type={props.input}/>
-      ): null}
+      {props.input && props.input === 'checkbox' ? <Checkbox {...props}/> : props.input && props.input === 'radio' ? <Radio {...props}/> : props.input && props.input === 'range'? (
+        <input type={props.input} min={props.min} max={props.max}/>
+      ): props.input ? <input type={props.input}/> : null}
     </div>
   );
 };

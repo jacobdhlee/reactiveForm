@@ -15,6 +15,8 @@ class ControlForm extends Component {
       field: '',
       input: '',
       radioField: '',
+      max: null,
+      min: null,
       subInput: [],
       label: '',
     }
@@ -40,7 +42,7 @@ class ControlForm extends Component {
   handleAddField = () => {
     let payload = {};
     for(let item in this.state) {
-      if(this.state[item].length > 0) {
+      if((!Array.isArray(this.state[item]) && this.state[item]) || (Array.isArray(this.state[item]) && this.state[item].length > 0)) {
         payload[item] = this.state[item];
       }
     }
@@ -82,6 +84,20 @@ class ControlForm extends Component {
             onChange={(e) => this.handleSelect('input', e)}
           />) 
         : null}
+        {
+          (this.state.field === 'input' && this.state.input === 'range' ? (
+            <div>
+              <div>
+                <lable>Min</lable>
+                <input type={'number'} onChange={(e) => this.setState({min: e.target.value})}/>
+              </div>
+              <div>
+                <lable>Max</lable>
+                <input type={'number'} onChange={(e) => this.setState({max: e.target.value})}/>
+              </div>
+            </div>
+          ): null)
+        } 
         {
           ((this.state.field === 'input' && this.addValue.includes(this.state.input)) || this.state.field === 'select') ? (
             <>
