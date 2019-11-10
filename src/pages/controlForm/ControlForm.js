@@ -46,6 +46,8 @@ class ControlForm extends Component {
         payload[item] = this.state[item];
       }
     }
+    payload.value = '';
+    payload.error = '';
     this.props.addField(payload);
     console.log(payload)
   }
